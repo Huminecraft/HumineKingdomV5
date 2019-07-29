@@ -127,9 +127,15 @@ task fullCleanProject {
     }
 }
 
+task copyAssets(type: Copy) {
+    from 'assets'
+    destinationDir file("server/plugins/$pluginName/")
+}
+
 task copyPlugins(type: Copy) {
     from 'plugins/'
     into 'server/plugins/'
+    finalizedBy copyAssets
 }
 
 task servePlugin {
@@ -149,10 +155,6 @@ task servePlugin {
     finalizedBy copyPlugins
 }
 
-task copyAssets(type: Copy) {
-    from 'assets'
-    destinationDir file("server/plugins/$pluginName/")
-}
 
 task setUpServer {
     doFirst {
@@ -168,7 +170,6 @@ task setUpServer {
         eula.createNewFile()
         eula.write('eula=true')
     }
-    finalizedBy copyAssets
     finalizedBy servePlugin
 }
 
