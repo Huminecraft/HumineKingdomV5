@@ -21,7 +21,7 @@ Liste des tasks gradle pour le projet:
 ## les dépendance
 Si le plugin utilise une API il sufit de glisser le jar dans le dossier ```libs/```.
 **Spigot est téléchargé automatiquement avec la version du projet PAS BESOIN DE LE FAIRE**.
-###La version de mincraft
+### La version de mincraft
 Pour modifier la version de minecraft utiliser par le plugin il faut aller dans le fichier ```build.gradle```.
 A la ligne *24* on y deffinie la variable ```mcServerVersion```. Il suffit de modifier la valeur de celle-ci
 pour changer la version de mincraft utiliser. **Ensuite executez le script ```gradlew``` pour qu'il télécharge
