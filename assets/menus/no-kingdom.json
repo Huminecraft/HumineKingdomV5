@@ -1,0 +1,56 @@
+{
+  "id": "no-kingdom",
+  "title": "- %DARK_PURPLE%Vous n'avez pas de Royaume%RESET% -",
+  "size": "3",
+  "security": "false",
+  "fill-line": [
+    {
+      "name": " ",
+      "material": "BLACK_STAINED_GLASS_PANE"
+    },
+    {
+      "name": " ",
+      "material": "PURPLE_STAINED_GLASS_PANE"
+    },
+    {
+      "name": " ",
+      "material": "BLACK_STAINED_GLASS_PANE"
+    }
+  ],
+  "fill-item": [
+    {
+      "slot": "10",
+      "button": {
+        "name": "%YELLOW%Créer un nouveau Royaume ! %GREEN%✔",
+        "material": "EMERALD_BLOCK",
+        "lore": [
+          "Cliquez pour valider"
+        ],
+        "action": "create-kingdom"
+      }
+    },
+    {
+      "slot": "16",
+      "button": {
+        "name": "%YELLOW%Non une autre fois peut-être... %RED%✗",
+        "material": "REDSTONE_BLOCK",
+        "lore": [
+          "Cliquez pour valider"
+        ],
+        "action": "close"
+      }
+    },
+    {
+      "slot": "13",
+      "item": {
+        "name": "%GREEN%INFORMATION !",
+        "material": "EMERALD",
+        "lore": [
+          "Afin de devenir plus puissant, tu",
+          "peux créer ton royaume et recruter",
+          "des amis pour dominer le monde de %WHITE%HumineCraft %DARK_PURPLE%!"
+        ]
+      }
+    }
+  ]
+}

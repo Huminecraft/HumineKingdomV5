@@ -1,0 +1,55 @@
+{
+  "id": "kingdom-invitation",
+  "title": "%DARK_GRAY%- %DARK_PURPLE%%SENDER_NAME% t'invite dans son royaume %SENDER_KINGDOM%%DARK_GRAY% -",
+  "size": "3",
+  "security": "true",
+  "fill-line": [
+    {
+      "name": " ",
+      "material": "BLACK_STAINED_GLASS_PANE"
+    },
+    {
+      "name": " ",
+      "material": "PURPLE_STAINED_GLASS_PANE"
+    },
+    {
+      "name": " ",
+      "material": "BLACK_STAINED_GLASS_PANE"
+    }
+  ],
+  "fill-item": [
+    {
+      "slot": "10",
+      "button": {
+        "name": "%YELLOW%Accepter l'invitation ! %GREEN%✔",
+        "material": "EMERALD_BLOCK",
+        "lore": [
+          "Cliquez pour valider"
+        ],
+        "action": "accept-invitation"
+      }
+    },
+    {
+      "slot": "16",
+      "button": {
+        "name": "%YELLOW%Non une autre fois peut-être... %RED%✗",
+        "material": "REDSTONE_BLOCK",
+        "lore": [
+          "Cliquez pour valider"
+        ],
+        "action": "refuse-invitation"
+      }
+    },
+    {
+      "slot": "13",
+      "item": {
+        "name": "%GREEN%INFORMATION !",
+        "material": "EMERALD",
+        "lore": [
+          "Afin de devenir plus puissant, tu",
+          "peux rejoindre le royaume %SENDER_KINGDOM%."
+        ]
+      }
+    }
+  ]
+}

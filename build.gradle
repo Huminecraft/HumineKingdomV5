@@ -1,0 +1,190 @@
+plugins {
+    id "java"
+    id "de.undercouch.download" version "3.4.3"
+}
+
+sourceSets.main.java.srcDirs = ['src']
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+compileJava.options.encoding = 'UTF-8'
+dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
+}
+
+jar {
+    from('src') {
+        include '*.yml'
+    }
+}
+
+def pluginName = "HumineKingdom"
+def mcServerVersion = "1.14.4"
+
+
+def mcServerFileName = "spigot-${mcServerVersion}.jar"
+def serverDir = "server"
+def binDir = "${serverDir}/bin"
+
+def updateVersionF(String value) {
+    String updateValue = ""
+    for (int i = value.replace('.', ' ').split(' ').size() -1 ; i >= 0 ; i--) {
+        if (i == value.replace('.', ' ').split(' ').size() -1)
+            updateValue = (Integer.parseInt(value.replace('.', ' ').split(' ')[i]) + 1) + (( updateValue != "") ? ".${updateValue}" : "")
+        else
+            updateValue = value.replace('.', ' ').split(' ')[i] + (( updateValue != "") ? ".${updateValue}" : "")
+    }
+
+    return updateValue
+
+}
+
+def getPluginVersion() {
+    def file = file 'src/plugin.yml'
+    for (int i = 0; i < file.readLines().size(); i++) {
+        def line = file.readLines().get(i).split(": ")
+        if (line[0].equals("version")) {
+           return line[1]
+        }
+    }
+}
+
+if (!file('assets').exists())
+    file('assets').mkdir()
+if (!file('libs').exists())
+    file('libs').mkdir()
+
+task installSpigot {
+    if (!file("libs/$mcServerFileName").exists()) {
+        println "installing last version of spigot for minecraft $mcServerVersion..."
+        file('spigot').deleteDir()
+        download {
+            src 'https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar'
+            dest 'spigot/bin/BuildTools.jar'
+        }
+        def serverArgs = [new File("bin", "BuildTools.jar"), "--rev", "${mcServerVersion}"]
+        javaexec {
+            main "-jar"
+            workingDir "spigot"
+            minHeapSize "512M"
+            maxHeapSize "2G"
+            args serverArgs
+        }
+        File libs = new File("libs");
+        for (File lib : libs.listFiles()) {
+            if (lib.name.contains("spigot")) {
+                lib.delete()
+            }
+        }
+        copy {
+            from "spigot/$mcServerFileName"
+            into "libs"
+        }
+    }
+}
+
+task updateVersion {
+    doLast {
+        def file = file 'src/plugin.yml'
+        def allLine = new String[file.readLines().size()]
+        for (int i = 0; i < file.readLines().size(); i++) {
+            def line = file.readLines().get(i).split(": ")
+            if (line[0].equals("version")) {
+                 allLine[i] = line[0] + ": " + updateVersionF(line[1])
+            } else {
+                allLine[i] = file.readLines().get(i)
+            }
+        }
+        delete file
+        file.createNewFile()
+        String value = ""
+        for (int i = 0 ; i < allLine.length ; i++) {
+            value += allLine[i]+"\n"
+            println value
+        }
+        file.write(value)
+
+    }
+}
+
+task buildPlugin(type: Copy) {
+    dependsOn build
+    from ('build/libs')
+    include "${pluginName}.jar"
+    destinationDir file('output')
+    rename "${pluginName}.jar", "${pluginName}-${getPluginVersion()}.jar"
+    finalizedBy updateVersion
+}
+
+task fullCleanProject {
+    dependsOn clean
+    doLast {
+        delete 'server'
+        delete 'output'
+        delete 'plugins'
+    }
+}
+
+task copyPlugins(type: Copy) {
+    from 'plugins/'
+    into 'server/plugins/'
+}
+
+task servePlugin {
+    dependsOn build
+    doLast {
+        copy {
+            from ('libs/') {
+                exclude "${mcServerFileName}"
+            }
+            into 'plugins/'
+        }
+        copy {
+            from "$buildDir/libs/${pluginName}.jar"
+            into 'plugins/'
+        }   
+    }
+    finalizedBy copyPlugins
+}
+
+task copyAssets(type: Copy) {
+    from 'assets'
+    destinationDir file("server/plugins/$pluginName/")
+}
+
+task setUpServer {
+    doFirst {
+        println "set up the server..."
+    }
+    doLast {
+        copy {
+            from "libs/${mcServerFileName}"
+            into binDir
+        }
+        file('server').mkdir()
+        File eula = file('server/eula.txt')
+        eula.createNewFile()
+        eula.write('eula=true')
+    }
+    finalizedBy copyAssets
+    finalizedBy servePlugin
+}
+
+task serve {
+
+    dependsOn setUpServer
+
+    doLast {
+        def serverArgs = [new File("bin", mcServerFileName.toString())]
+        javaexec {
+            main "-jar"
+            workingDir serverDir
+            minHeapSize "512M"
+            maxHeapSize "2G"
+            args serverArgs
+            standardInput System.in
+        }
+    }
+}

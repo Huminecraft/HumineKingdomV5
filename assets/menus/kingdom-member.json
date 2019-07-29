@@ -1,0 +1,45 @@
+{
+  "id": "kingdom-member",
+  "title": "%DARK_GRAY%- %GREEN%Liste des membres %DARK_GRAY%-",
+  "security": "false",
+  "container": {
+    "for": "%KINGDOM_MEMBERS%",
+    "button": {
+      "name": "%GREEN%%ITEM_VALUE%",
+      "owner": "%ITEM_VALUE%",
+      "action": "view-member"
+    },
+    "fill": {
+      "line": {
+        "name": " ",
+        "material": "PURPLE_STAINED_GLASS_PANE"
+      },
+      "fill-item": [
+        {
+          "slot": "8",
+          "button": {
+            "name": "%RED%Quitter",
+            "material": "BARRIER",
+            "redirect-to": "kingdom-main"
+          }
+        },
+        {
+          "slot": "4",
+          "button": {
+            "name": "%AQUA%rafraîchir la page",
+            "material": "ICE",
+            "redirect-to": "kingdom-member"
+          }
+        },
+        {
+          "slot": "0",
+          "button": {
+            "name": "%GREEN%Ajouter un membre",
+            "material": "LEGACY_BOOK_AND_QUILL",
+            "action": "send-invitation"
+          }
+        }
+      ]
+    }
+  }
+}

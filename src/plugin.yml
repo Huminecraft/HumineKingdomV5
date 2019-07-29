@@ -1,0 +1,12 @@
+name: HumineKingdom
+version: 5.0.0
+author: Aymegike
+main: com.huminecraft.huminekingdom.HumineKingdom
+api-version: 1.14
+depend:
+  - Aypi
+commands:
+  kingdom:
+    description: Acceder au Royaume.
+  rank:
+    description: Voir le classement des Royaume.

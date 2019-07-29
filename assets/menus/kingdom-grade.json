@@ -1,0 +1,45 @@
+{
+  "id": "kingdom-grade",
+  "title": "%DARK_GRAY%- %BLUE%Grade %DARK_GRAY%-",
+  "security": "false",
+  "container": {
+    "for": "%KINGDOM_GRADES%",
+    "button": {
+      "name": "%BLUE%%ITEM_VALUE%",
+      "material": "NAME_TAG",
+      "action": "view-grade"
+    },
+    "fill": {
+      "line": {
+        "name": " ",
+        "material": "PURPLE_STAINED_GLASS_PANE"
+      },
+      "fill-item": [
+        {
+          "slot": "8",
+          "button": {
+            "name": "%RED%Quitter",
+            "material": "BARRIER",
+            "redirect-to": "kingdom-main"
+          }
+        },
+        {
+          "slot": "4",
+          "button": {
+            "name": "%AQUA%rafraîchir la page",
+            "material": "ICE",
+            "redirect-to": "kingdom-grade"
+          }
+        },
+        {
+          "slot": "0",
+          "button": {
+            "name": "%GREEN%Ajouter un grade",
+            "material": "LEGACY_BOOK_AND_QUILL",
+            "action": "add-grade"
+          }
+        }
+      ]
+    }
+  }
+}

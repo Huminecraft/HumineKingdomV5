@@ -1,0 +1,65 @@
+{
+  "messages": [
+    {
+      "id": "error",
+      "value": "%RED%Il y a comme un problème..."
+    },
+
+    {
+      "id": "invitation-send",
+      "value": "Tu viens d'envoyer une invitation a %TARGET_NAME%."
+    },
+    {
+      "id": "invitation-not-send",
+      "value": "%TARGET_NAME% est introuvable."
+    },
+    {
+      "id": "invitation-add-player",
+      "value": "Super ! Indique le nom du joueur a ajouter..."
+    },
+    {
+      "id": "refuse-invitation",
+      "value": "%TARGET_NAME% a refuser l'invitation..."
+    },
+    {
+      "id": "welcome-kingdom",
+      "value": "Bienvenue a %NEW_PLAYER% dans %KINGDOM_NAME% !"
+    },
+
+    {
+      "id": "kingdom-enter-name",
+      "value": "%WHITE%Chouette ! Tout d'abord il faut donner un nom à ton royaume ! %DARK_PURPLE%(Tu ne pourras pas le modifier)",
+      "sound": "ENTITY_EXPERIENCE_ORB_PICKUP"
+    },
+    {
+      "id": "kingdom-valide-name",
+      "value": "%DARK_PURPLE%Construction du futur empire en cours...",
+      "sound": "BLOCK_ANVIL_USE"
+    },
+
+
+    {
+      "id": "grade-enter-name",
+      "value": "%WHITE%Chouette ! Tout d'abord il faut donner un nom à ton nouveau %DARK_PURPLE%grade %WHITE%!",
+      "sound": "ENTITY_EXPERIENCE_ORB_PICKUP"
+    },
+    {
+      "id": "grade-valide-name",
+      "value": "%DARK_PURPLE%Tu viens de créer ton grade.",
+      "sound": "ENTITY_EXPERIENCE_ORB_PICKUP"
+    },
+    {
+      "id": "grade-delete",
+      "value": "%RED%Tu viens de supprimer le grade %GRADE_NAME%.",
+      "sound": "ENTITY_EXPERIENCE_ORB_PICKUP"
+    },
+    {
+      "id": "grade-cant-delete",
+      "value": "%RED%Tu ne peux pas supprimer le grade du roi..."
+    },
+    {
+      "id": "permission-cant-change",
+      "value": "%RED%Tu ne peux pas modifier les permissions du roi..."
+    }
+  ]
+}
